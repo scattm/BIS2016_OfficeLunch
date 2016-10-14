@@ -55,8 +55,25 @@
 
   var officer_story = document.getElementById('officer-story');
 
+  var clear_fuzzy_lunch = function (step) {
+    let fl = step.getElementsByClassName('fuzzy-lunch');
+    while (fl[0]) {
+      fl[0].parentNode.removeChild(fl[0]);
+    }
+  };
+
+  var clear_meeting_pic = function (step) {
+    let el = step.getElementsByClassName('meeting-pic');
+    if (el[0]) {
+      el[0].parentNode.removeChild(el[0]);
+    }
+  };
+
   officer_story.addEventListener('impress:stepenter', function (event) {
     let step = event.target;
+    clear_fuzzy_lunch(step);
+    clear_meeting_pic(step);
+
     initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 11, 5, 19));
     window.setTimeout(function () {
       let count = 0;
@@ -78,15 +95,13 @@
 
     $(window).on('keydown', function (e) {
       if (String.fromCharCode(e.which).toLowerCase() === 'c') {
-        let fl = step.getElementsByClassName('fuzzy-lunch');
-        while (fl[0]) {
-          fl[0].parentNode.removeChild(fl[0]);
-        }
+        clear_fuzzy_lunch(step)
       }
       $(window).on('keydown', function (e1) {
         if (String.fromCharCode(e1.which).toLowerCase() === 'm') {
           let el = document.createElement("img");
           el.setAttribute("src", "img/meeting_room.jpg");
+          el.setAttribute("class", "animated fadeIn fuzzy-lunch");
           el.setAttribute("style", "position: absolute; bottom: 10px; left: 5px;");
           step.appendChild(el);
 
