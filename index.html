@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Office Lunch Delivery</title>
+  <link href="css/impress.css" rel="stylesheet" type="text/css">
+  <link href="css/officelunch.css" rel="stylesheet" type="text/css">
+  <link href="css/clock.css" rel="stylesheet" type="text/css">
+  <link href="css/animate.css" rel="stylesheet" type="text/css">
+  <script src="js/clock.js" type="text/javascript"></script>
+</head>
+<body>
+<script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="js/impress.js" type="text/javascript"></script>
+
+<div id="impress">
+  <div id="title" class="step" data-x="0" data-y="0">
+    <h1>Office Lunch</h1>
+  </div>
+
+  <div id="group" class="step" data-x="0" data-y="1200" data-rotate="60">
+    <h3>Group #6</h3>
+    <ul>
+      <li>Nguyễn Trọng Nghĩa</li>
+      <li>Trần Thị Cẩm Tú</li>
+      <li>Phan Chí Trung</li>
+    </ul>
+  </div>
+
+  <div id="officer-story" class="step" data-x="1200" data-y="0" data-rotate="0">
+    <article class="clock simple">
+      <div class="hours-container">
+        <div class="hours"></div>
+      </div>
+      <div class="minutes-container">
+        <div class="minutes"></div>
+      </div>
+      <div class="seconds-container">
+        <div class="seconds"></div>
+      </div>
+    </article>
+  </div>
+
+  <div id="office-lunch" class="step" data-x="1200" data-y="1200" data-rotate="120">
+    <ul>
+      <li><a href="http://ntngh2712.wixsite.com/officelunch">Office Lunch's Official site</a></li>
+      <li><a href="http://ntngh2712.wixsite.com/ntnofficelunch">TNT's Office Lunch site</a></li>
+      <li><a href="http://ntngh2712.wixsite.com/restaurant">Office Lunch site for restaurants</a></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  impress().init();
+
+  var officer_story = document.getElementById('officer-story');
+
+  officer_story.addEventListener('impress:stepenter', function (event) {
+    let step = event.target;
+    initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 11, 5, 19));
+    window.setTimeout(function () {
+      let count = 0;
+      let id = window.setInterval(function () {
+        count++;
+        let el = document.createElement("p");
+        let top = Math.random() * 700, left = Math.random() * 700;
+        el.setAttribute("class", "animated fadeIn fuzzy-lunch");
+        el.setAttribute("style", "position: absolute; top: " + top + "px; left: " + left + "px;");
+        el.appendChild(
+          document.createTextNode("Lunch")
+        );
+        step.appendChild(el);
+        if (count == 50) {
+          clearInterval(id)
+        }
+      }, 400)
+    }, 1000);
+
+    $(window).on('keydown', function (e) {
+      if (String.fromCharCode(e.which).toLowerCase() === 'c') {
+        let fl = step.getElementsByClassName('fuzzy-lunch');
+        while (fl[0]) {
+          fl[0].parentNode.removeChild(fl[0]);
+        }
+      }
+      $(window).on('keydown', function (e1) {
+        if (String.fromCharCode(e1.which).toLowerCase() === 'm') {
+          let el = document.createElement("img");
+          el.setAttribute("src", "img/meeting_room.jpg");
+          el.setAttribute("style", "position: absolute; bottom: 10px; left: 5px;");
+          step.appendChild(el);
+
+          window.setTimeout(function () {
+            initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 11, 15, 49));
+
+            window.setTimeout(function () {
+              initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 11, 25, 49));
+
+              window.setTimeout(function () {
+                initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 11, 35, 49));
+
+                window.setTimeout(function () {
+                  initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 11, 45, 49));
+
+                  window.setTimeout(function () {
+                    initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 12, 1, 49));
+
+                    window.setTimeout(function () {
+                      initLocalClocks(step.querySelector('.clock'), new Date(2016, 10, 12, 12, 15, 49));
+                    }, 3000);
+                  }, 3000);
+                }, 3000);
+              }, 3000);
+            }, 3000);
+          }, 3000);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
