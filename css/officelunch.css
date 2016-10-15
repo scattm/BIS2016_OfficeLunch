@@ -10,3 +10,24 @@
   list-style-type: disc;
   font-size: 64px;
 }
+
+.image-with-cap {
+  border: 2px solid black;
+  width: 150px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.image-with-cap img {
+  width: 150px;
+}
+
+.image-with-cap .captain {
+  width: 150px;
+  height: 30px;
+  background-color: rgba(216, 216, 216, 0.7);
+  position: absolute;
+  bottom: 0;
+  font-size: 20px;
+  text-align: center;
+}
